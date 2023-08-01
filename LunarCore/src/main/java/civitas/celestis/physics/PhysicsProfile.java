@@ -34,6 +34,22 @@ public interface PhysicsProfile {
     double density();
 
     /**
+     * Gets the coefficient of drag when viewed from given angle.
+     *
+     * @param direction Direction to view this object from
+     * @return Coefficient of drag
+     */
+    double dragCoefficient(@Nonnull Vector3 direction);
+
+    /**
+     * Gets the visual cross-section when viewed from given angle.
+     *
+     * @param direction Direction to view this object from
+     * @return Cross-section
+     */
+    double crossSection(@Nonnull Vector3 direction);
+
+    /**
      * Gets the discrete solid of this profile.
      *
      * @param origin   Absolute origin of this profile (most likely the location of its parent object)

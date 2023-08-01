@@ -2,31 +2,21 @@ package civitas.celestis;
 
 import civitas.celestis.event.EventManager;
 import civitas.celestis.event.internal.SyncEventManager;
+import civitas.celestis.listener.object.ObjectPairListener;
 import civitas.celestis.task.internal.AsyncScheduler;
 import civitas.celestis.task.internal.Scheduler;
 import jakarta.annotation.Nonnull;
+
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * <h2>LunarEngine</h2>
  * <p>
  * The main class of Lunar engine.
- * This class is designed to be inherited, instead of being contained.
  * </p>
  */
 public class LunarEngine {
-    //
-    // Constructors
-    //
-
-    /**
-     * Default constructor.
-     * This is useful for simple projects.
-     */
-    public LunarEngine() {
-        this.scheduler = new AsyncScheduler();
-        this.eventManager = new SyncEventManager();
-    }
-
     //
     // Lifecycle
     //
@@ -35,16 +25,38 @@ public class LunarEngine {
      * Starts the engine.
      */
     public void start() {
+        logger.info("Lunar Engine is starting.");
+
+        // Initialize modules
+        registerEventListeners();
+
+        // Start modules
         eventManager.start();
         scheduler.start();
+
+        logger.info("Lunar Engine has started.");
     }
 
     /**
      * Stops the engine.
      */
     public void stop() {
+        logger.info("Lunar Engine is stopping.");
+
+        // Stop modules
         eventManager.stop();
         scheduler.stop();
+
+        logger.info("Lunar Engine has stopped.");
+    }
+
+    /**
+     * Registers first-party event listeners.
+     */
+    private void registerEventListeners() {
+        eventManager.register(List.of(
+                new ObjectPairListener()
+        ));
     }
 
     //
@@ -57,7 +69,7 @@ public class LunarEngine {
      * @return Instance of {@link Scheduler}
      */
     @Nonnull
-    public Scheduler getScheduler() {
+    public static Scheduler getScheduler() {
         return scheduler;
     }
 
@@ -67,12 +79,26 @@ public class LunarEngine {
      * @return Instance of {@link EventManager}
      */
     @Nonnull
-    public EventManager getEventManager() {
+    public static EventManager getEventManager() {
         return eventManager;
     }
 
-    private final Scheduler scheduler;
-    private final EventManager eventManager;
+    private static final Scheduler scheduler = new AsyncScheduler();
+    private static final EventManager eventManager = new SyncEventManager();
 
+    //
+    // Logger
+    //
 
+    /**
+     * Gets the logger instance.
+     *
+     * @return {@link Logger}
+     */
+    @Nonnull
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    private static final Logger logger = Logger.getLogger("LunarEngine");
 }

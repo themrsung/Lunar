@@ -65,6 +65,23 @@ public abstract class AbstractObject extends AbstractMovable implements BaseObje
     @Nonnull
     private Model model;
 
+    /**
+     * Default tick behavior.
+     *
+     * @param delta Duration between the last tick and now in milliseconds.
+     */
+    @Override
+    public void tick(long delta) {
+        // Convert delta to seconds
+        final double seconds = delta / 1000d;
+
+        // Apply acceleration
+        move(getAcceleration().multiply(seconds));
+
+        // Apply rate of rotation
+        rotate(getRotationRate().scale(seconds));
+    }
+
     @Override
     @Nonnull
     public PhysicsProfile getPhysics() {

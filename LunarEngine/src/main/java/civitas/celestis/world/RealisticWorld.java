@@ -1,8 +1,11 @@
-package civitas.celestis.object.world;
+package civitas.celestis.world;
 
+import civitas.celestis.LunarEngine;
+import civitas.celestis.event.object.ObjectsCollidedEvent;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.LunarObjects;
 import civitas.celestis.object.base.BaseObject;
+import civitas.celestis.object.world.AbstractWorld;
 import civitas.celestis.util.group.Groups;
 import civitas.celestis.util.group.Pair;
 import jakarta.annotation.Nonnull;
@@ -10,6 +13,7 @@ import jakarta.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <h2>RealisticWorld</h2>
@@ -110,10 +114,8 @@ public class RealisticWorld extends AbstractWorld {
             final BaseObject b = p.b();
 
             if (LunarObjects.overlaps(a, b)) {
-                if (!overlaps.contains(p)) {
-                    // Trigger collision event
-                    // FIXME
-                }
+                // Call collision event if this is the first overlap of given object pair
+                if (!overlaps.contains(p)) LunarEngine.getEventManager().call(new ObjectsCollidedEvent(p));
             } else {
                 overlaps.remove(p);
             }
@@ -130,7 +132,40 @@ public class RealisticWorld extends AbstractWorld {
             // Apply gravity
             o.accelerate(g);
 
+            //
             // Fluid resistance
+            //
+
+            // Initial value is set to global air density
+            final AtomicReference<Double> fluidDensity = new AtomicReference<>(airDensity);
+
+            // Apply density of highest overlapping object
+            for (final Pair<BaseObject> p : overlaps) {
+                if (!p.contains(o)) continue;
+                fluidDensity.getAndUpdate(d -> Math.max(d, p.other(o).getPhysics().density()));
+            }
+
+            // Calculate drag force
+            final double dragForce = o.getPhysics().dragCoefficient(o.getAcceleration().negate())
+                    * fluidDensity.get()
+                    * o.getPhysics().crossSection(o.getAcceleration().negate())
+                    * o.getAcceleration().magnitude2();
+
+            // Filter out illegal values
+            if (!Double.isFinite(dragForce)) continue;
+            if (dragForce <= 0) continue;
+
+            // Calculate kinetic energy
+            final double kineticEnergy = 0.5d * o.getPhysics().mass() * o.getAcceleration().magnitude();
+            if (kineticEnergy == 0) continue; // No need to apply resistance
+
+            // Calculate ratio of deceleration
+            final double decelerationRatio = Math.max(Math.min(1, 1 - ((dragForce * seconds) / kineticEnergy)), 0);
+
+            // Apply drag force
+            o.setAcceleration(o.getAcceleration().multiply(decelerationRatio));
+
+            // Tick objects
             o.tick(delta);
         }
     }

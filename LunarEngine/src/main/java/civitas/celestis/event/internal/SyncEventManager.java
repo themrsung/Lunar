@@ -1,5 +1,6 @@
 package civitas.celestis.event.internal;
 
+import civitas.celestis.LunarEngine;
 import civitas.celestis.event.Event;
 import civitas.celestis.event.EventManager;
 import civitas.celestis.event.Listener;
@@ -89,7 +90,8 @@ public final class SyncEventManager implements EventManager {
                     h.handler().invoke(h.listener(), event);
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     // Handle exception
-                    e.printStackTrace();
+                    LunarEngine.getLogger().warning("Error occurred while handling an event.");
+                    LunarEngine.getLogger().warning(e.getMessage());
                 }
             }
         }
