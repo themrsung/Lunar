@@ -1,4 +1,4 @@
-package civitas.celestis;
+package civitas.celestis.math.vector;
 
 import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.rotation.Rotation;

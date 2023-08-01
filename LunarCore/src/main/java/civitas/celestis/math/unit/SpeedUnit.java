@@ -1,4 +1,4 @@
-package civitas.celestis.unit;
+package civitas.celestis.math.unit;
 
 import jakarta.annotation.Nonnull;
 

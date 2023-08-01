@@ -1,5 +1,6 @@
-package civitas.celestis;
+package civitas.celestis.math.vector;
 
+import civitas.celestis.math.Numbers;
 import jakarta.annotation.Nonnull;
 
 import java.util.Arrays;
