@@ -40,7 +40,8 @@ public class LArray<E> extends ArrayList<E> implements LList<E> {
      * @param a   Array of elements
      * @param <F> Any subtype of {@link E}
      */
-    public <F extends E> LArray(@Nonnull F[] a) {
+    @SafeVarargs
+    public <F extends E> LArray(@Nonnull F... a) {
         this(Arrays.asList(a));
     }
 
