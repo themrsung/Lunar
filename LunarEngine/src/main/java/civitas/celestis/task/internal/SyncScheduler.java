@@ -60,16 +60,20 @@ public final class SyncScheduler implements Scheduler {
     private final Thread thread = new Thread(() -> {
 
         while (true) {
+            // Respect interruption
             if (Thread.interrupted()) return;
 
+            // Iterate through tasks
             for (final Task t : List.copyOf(tasks)) {
+                // Calculate delta
                 final long now = System.currentTimeMillis();
                 final long previous = times.getOrDefault(t, now);
-
                 final long delta = now - previous;
 
+                // Respect interval of task
                 if (delta < t.interval()) continue;
 
+                // Execute task and keep time
                 t.execute(delta);
                 times.put(t, now);
             }
