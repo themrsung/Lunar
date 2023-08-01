@@ -12,7 +12,7 @@ import java.util.UUID;
  *
  * @param <U> Type of unique element to hold
  */
-public class LUniqueArray<U extends Unique> extends LArrayList<U> implements LUniqueList<U> {
+public class LUniqueArray<U extends Unique> extends LArray<U> implements LUniqueList<U> {
     /**
      * Creates a new empty list.
      */

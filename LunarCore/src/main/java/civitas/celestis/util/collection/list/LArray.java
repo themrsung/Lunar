@@ -12,17 +12,17 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
- * <h2>LArrayList</h2>
+ * <h2>LArray</h2>
  * <p>
  * A specialized version of {@link ArrayList}.
  * This class inherits all the properties of {@link LList} and its parent classes.
  * </p>
  */
-public class LArrayList<E> extends ArrayList<E> implements LList<E> {
+public class LArray<E> extends ArrayList<E> implements LList<E> {
     /**
      * Creates a new empty list.
      */
-    public LArrayList() {
+    public LArray() {
     }
 
     /**
@@ -30,7 +30,7 @@ public class LArrayList<E> extends ArrayList<E> implements LList<E> {
      *
      * @param initialCapacity Initial capacity of list
      */
-    public LArrayList(int initialCapacity) {
+    public LArray(int initialCapacity) {
         super(initialCapacity);
     }
 
@@ -40,7 +40,7 @@ public class LArrayList<E> extends ArrayList<E> implements LList<E> {
      * @param a   Array of elements
      * @param <F> Any subtype of {@link E}
      */
-    public <F extends E> LArrayList(@Nonnull F[] a) {
+    public <F extends E> LArray(@Nonnull F[] a) {
         this(Arrays.asList(a));
     }
 
@@ -49,7 +49,7 @@ public class LArrayList<E> extends ArrayList<E> implements LList<E> {
      *
      * @param c Collection to use
      */
-    public LArrayList(@Nonnull Collection<? extends E> c) {
+    public LArray(@Nonnull Collection<? extends E> c) {
         super(c);
     }
 
@@ -75,7 +75,7 @@ public class LArrayList<E> extends ArrayList<E> implements LList<E> {
     @Nonnull
     @Override
     public LList<Pair<E>> pairs() {
-        final LList<Pair<E>> pairs = new LArrayList<>(size());
+        final LList<Pair<E>> pairs = new LArray<>(size());
 
         forEach(a -> filter(e -> !e.equals(a)).forEach(b -> {
             final Pair<E> pair = new Pair<>(a, b);

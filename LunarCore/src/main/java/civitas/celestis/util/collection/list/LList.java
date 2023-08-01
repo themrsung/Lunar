@@ -23,7 +23,7 @@ public interface LList<E> extends LCollection<E>, List<E> {
     @SafeVarargs
     @Nonnull
     static <T> LList<T> of(@Nonnull T... elements) {
-        return new LArrayList<>(elements);
+        return new LArray<>(elements);
     }
 
     /**
