@@ -1,7 +1,7 @@
 package civitas.celestis.graphics.scene;
 
 import civitas.celestis.graphics.ray.Ray;
-import civitas.celestis.graphics.triangle.Vertex;
+import civitas.celestis.graphics.vertex.Vertex;
 import civitas.celestis.object.RaySource;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;

@@ -1,4 +1,4 @@
-package civitas.celestis.graphics.triangle;
+package civitas.celestis.graphics.vertex;
 
 import civitas.celestis.graphics.ray.Ray;
 import civitas.celestis.math.rotation.Rotation;

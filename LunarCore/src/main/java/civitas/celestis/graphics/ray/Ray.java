@@ -1,6 +1,6 @@
 package civitas.celestis.graphics.ray;
 
-import civitas.celestis.graphics.triangle.Vertex;
+import civitas.celestis.graphics.vertex.Vertex;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
