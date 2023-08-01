@@ -12,6 +12,7 @@
         <module>LunarEngine</module>
         <module>LunarCore</module>
         <module>LunarSample</module>
+        <module>LunarEditor</module>
     </modules>
 
     <properties>

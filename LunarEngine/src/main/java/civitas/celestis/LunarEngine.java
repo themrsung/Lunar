@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * The main class of Lunar engine.
  * </p>
  */
-public class LunarEngine {
+public final class LunarEngine {
     //
     // Lifecycle
     //
