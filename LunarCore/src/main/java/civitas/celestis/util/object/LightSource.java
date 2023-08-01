@@ -7,9 +7,9 @@ import java.awt.*;
 /**
  * <h2>LightSource</h2>
  * <p>
- *     A source of light.
- *     Light sources emit either directional or omnidirectional light
- *     of a certain shade and intensity.
+ * A source of light.
+ * Light sources emit either directional or omnidirectional light
+ * of a certain shade and intensity.
  * </p>
  */
 public interface LightSource extends Movable {

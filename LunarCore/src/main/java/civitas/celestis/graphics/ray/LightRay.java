@@ -18,9 +18,9 @@ public final class LightRay implements Ray {
     /**
      * Creates a new light ray.
      *
-     * @param origin Origin of ray
+     * @param origin    Origin of ray
      * @param direction Direction of ray (automatically normalized)
-     * @param color Color of ray
+     * @param color     Color of ray
      * @param intensity Intensity of ray
      */
     public LightRay(
@@ -69,6 +69,7 @@ public final class LightRay implements Ray {
 
     /**
      * Gets the color of this ray.
+     *
      * @return Color of ray
      */
     @Nonnull
@@ -76,6 +77,7 @@ public final class LightRay implements Ray {
 
     /**
      * Gets the intensity of this ray.
+     *
      * @return Intensity factor
      */
     public double intensity() {return intensity;}

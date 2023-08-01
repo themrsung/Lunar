@@ -18,6 +18,7 @@ public class Polygon2 extends Polygon {
 
     /**
      * Adds a point to this polygon.
+     *
      * @param point Point to add
      */
     public void addPoint(@Nonnull Vector2 point) {

@@ -41,8 +41,9 @@ public final class Vertex implements Iterable<Vector3> {
 
     /**
      * Creates a new vertex.
+     *
      * @param points A list of points containing exactly 3 points
-     * @param color Base color of this vertex
+     * @param color  Base color of this vertex
      */
     public Vertex(
             @Nonnull List<Vector3> points,
@@ -91,6 +92,7 @@ public final class Vertex implements Iterable<Vector3> {
 
     /**
      * Gets a list of points in this vertex.
+     *
      * @return List of points
      */
     @Nonnull
@@ -244,9 +246,10 @@ public final class Vertex implements Iterable<Vector3> {
      * Assuming this vertex has been translated to a coordinate system relative to the viewer,
      * this method converts the vertex to a renderable polygon.
      * <p>
-     *     Since {@link Polygon2} extends {@link Polygon}, the return value of this method
-     *     can be directly be inputted into a {@code Graphics} object.
+     * Since {@link Polygon2} extends {@link Polygon}, the return value of this method
+     * can be directly be inputted into a {@code Graphics} object.
      * </p>
+     *
      * @param focalLength Focal length of camera at this time
      * @return Renderable polygon
      */
@@ -264,6 +267,7 @@ public final class Vertex implements Iterable<Vector3> {
 
     /**
      * Gets an iterator of the component vectors of this vertex.
+     *
      * @return Iterator of vectors
      */
     @Override

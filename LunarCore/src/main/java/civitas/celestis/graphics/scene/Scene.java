@@ -9,16 +9,17 @@ import java.util.function.Predicate;
 /**
  * <h2>Scene</h2>
  * <p>
- *     An object used to hold pre-rendered information about an in-game environment.
- *     All instances of this object should be placed inside an AWT component
- *     to ensure the computational load is distributed to the GPU.
+ * An object used to hold pre-rendered information about an in-game environment.
+ * All instances of this object should be placed inside an AWT component
+ * to ensure the computational load is distributed to the GPU.
  * </p>
  */
 public class Scene {
     /**
      * Creates a new scene.
+     *
      * @param vertices List of predetermined vertices
-     * @param shading List of precalculated shaders
+     * @param shading  List of precalculated shaders
      */
     public Scene(@Nonnull Collection<Vertex> vertices, @Nonnull Map<Vertex, Double> shading) {
         // Copy collections to prevent immutable collections throwing exceptions
@@ -28,6 +29,7 @@ public class Scene {
 
     /**
      * Creates a new scene.
+     *
      * @param vertices List of predetermined vertices
      */
     public Scene(@Nonnull Collection<Vertex> vertices) {
@@ -69,6 +71,7 @@ public class Scene {
 
     /**
      * Adds a vertex to this scene.
+     *
      * @param v Vertex to add
      */
     public void add(@Nonnull Vertex v) {
@@ -77,6 +80,7 @@ public class Scene {
 
     /**
      * Adds multiple vertices to this scene.
+     *
      * @param v Collection of vertices to add
      */
     public void add(@Nonnull Collection<Vertex> v) {
@@ -85,6 +89,7 @@ public class Scene {
 
     /**
      * Removes a vertex from this scene.
+     *
      * @param v Vertex to remove
      */
     public void remove(@Nonnull Vertex v) {
@@ -93,6 +98,7 @@ public class Scene {
 
     /**
      * Removes multiple vertices from this scene.
+     *
      * @param v Collection of vertices to remove
      */
     public void remove(@Nonnull Collection<Vertex> v) {
@@ -101,6 +107,7 @@ public class Scene {
 
     /**
      * Whitelists the list of vertices in this scene.
+     *
      * @param filter Filter to apply
      */
     public void removeIf(@Nonnull Predicate<? super Vertex> filter) {
@@ -113,6 +120,7 @@ public class Scene {
 
     /**
      * Gets a list of all vertices in this scene.
+     *
      * @return List of vertices
      */
     @Nonnull
@@ -122,6 +130,7 @@ public class Scene {
 
     /**
      * Gets a map of shading in this scene.
+     *
      * @return Map of shading
      */
     @Nonnull
