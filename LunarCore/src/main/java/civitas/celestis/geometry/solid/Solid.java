@@ -1,6 +1,5 @@
 package civitas.celestis.geometry.solid;
 
-import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 
@@ -13,6 +12,7 @@ import java.util.List;
 public interface Solid {
     /**
      * Gets the geometric centroid of this solid.
+     *
      * @return Geometric centroid
      */
     @Nonnull
@@ -20,6 +20,7 @@ public interface Solid {
 
     /**
      * Gets a list of corners of this solid.
+     *
      * @return List of corners
      */
     @Nonnull
@@ -27,18 +28,21 @@ public interface Solid {
 
     /**
      * Gets the volume of this solid.
+     *
      * @return Volume
      */
     double volume();
 
     /**
      * Gets the signed volume of this solid.
+     *
      * @return Signed volume
      */
     double signedVolume();
 
     /**
      * Checks if given point is within the bounds of {@code this}.
+     *
      * @param point Point to check
      * @return {@code true} if this solid contains given point
      */
@@ -46,6 +50,7 @@ public interface Solid {
 
     /**
      * Checks if this solid overlaps another.
+     *
      * @param other Solid to check
      * @return {@code true} if this solid has at least one common point with given solid
      */

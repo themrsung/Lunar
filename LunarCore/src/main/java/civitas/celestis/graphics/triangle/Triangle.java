@@ -2,7 +2,6 @@ package civitas.celestis.graphics.triangle;
 
 import civitas.celestis.geometry.solid.Tetrahedron;
 import civitas.celestis.graphics.ray.Ray;
-import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -17,9 +16,9 @@ public final class Triangle {
     /**
      * Creates a new triangle.
      *
-     * @param a First point of this triangle
-     * @param b Second point of this triangle
-     * @param c Third point of this triangle
+     * @param a     First point of this triangle
+     * @param b     Second point of this triangle
+     * @param c     Third point of this triangle
      * @param color Base color of this triangle
      */
     public Triangle(
@@ -45,6 +44,7 @@ public final class Triangle {
 
     /**
      * Gets the first point of this triangle.
+     *
      * @return Point A
      */
     @Nonnull
@@ -52,6 +52,7 @@ public final class Triangle {
 
     /**
      * Gets the second point of this triangle.
+     *
      * @return Point B
      */
     @Nonnull
@@ -59,6 +60,7 @@ public final class Triangle {
 
     /**
      * Gets the third point of this triangle.
+     *
      * @return Point C
      */
     @Nonnull
@@ -66,6 +68,7 @@ public final class Triangle {
 
     /**
      * Gets the color of this triangle.
+     *
      * @return Base color
      */
     @Nonnull
@@ -73,6 +76,7 @@ public final class Triangle {
 
     /**
      * Gets the surface normal of this triangle.
+     *
      * @return Surface normal
      */
     @Nonnull
@@ -82,6 +86,7 @@ public final class Triangle {
 
     /**
      * Gets the geometric centroid of this triangle.
+     *
      * @return Geometric centroid
      */
     @Nonnull
@@ -91,6 +96,7 @@ public final class Triangle {
 
     /**
      * Gets the intersection between {@code this} and {@code ray}.
+     *
      * @param ray Ray to check intersection with
      * @return Intersection point if found, {@code null} if not
      */
@@ -130,5 +136,26 @@ public final class Triangle {
         if (t < 0) return null;
 
         return ray.destination(t);
+    }
+
+    /**
+     * Given a directional vector {@code in}, this returns its reflection vector
+     * if the vector were to collide with this triangle.
+     * <p>
+     * Note that this does not account for whether the two objects intersect,
+     * and cannot be used to check if a triangle and line intersect.
+     * </p>
+     * <p>
+     * To check whether the two objects intersect, check for {@code null}
+     * in the return value of {@link Triangle#intersection(Ray)}.
+     * </p>
+     *
+     * @param in Input vector
+     * @return Reflection vector
+     */
+    @Nonnull
+    public Vector3 reflection(@Nonnull Vector3 in) {
+        final Vector3 n = normal();
+        return in.subtract(n.multiply(2 * in.dot(n)));
     }
 }

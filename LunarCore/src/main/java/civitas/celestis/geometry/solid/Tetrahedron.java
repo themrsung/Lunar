@@ -1,7 +1,5 @@
 package civitas.celestis.geometry.solid;
 
-import civitas.celestis.math.Numbers;
-import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
 
@@ -10,12 +8,13 @@ import java.util.List;
 /**
  * <h2>Tetrahedron</h2>
  * <p>
- *     A solid with four regular triangles.
+ * A solid with four regular triangles.
  * </p>
  */
 public class Tetrahedron implements Solid {
     /**
      * Creates a new tetrahedron.
+     *
      * @param a First point of this tetrahedron
      * @param b Second point of this tetrahedron
      * @param c Third point of this tetrahedron
@@ -39,6 +38,7 @@ public class Tetrahedron implements Solid {
 
     /**
      * Gets the first point of this tetrahedron.
+     *
      * @return Point A
      */
     @Nonnull
@@ -48,6 +48,7 @@ public class Tetrahedron implements Solid {
 
     /**
      * Gets the second point of this tetrahedron.
+     *
      * @return Point B
      */
     @Nonnull
@@ -57,6 +58,7 @@ public class Tetrahedron implements Solid {
 
     /**
      * Gets the third point of this tetrahedron.
+     *
      * @return Point C
      */
     @Nonnull
@@ -66,6 +68,7 @@ public class Tetrahedron implements Solid {
 
     /**
      * Gets the fourth point of this tetrahedron.
+     *
      * @return Point D
      */
     @Nonnull
