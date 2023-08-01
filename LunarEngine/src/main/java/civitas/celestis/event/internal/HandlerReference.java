@@ -10,14 +10,16 @@ import java.lang.reflect.Method;
 /**
  * <h2>HandlerReference</h2>
  * <p>
- *     A transient reference class to an event handler.
+ * A transient reference class to an event handler.
  * </p>
+ *
  * @param listener Listener object
- * @param handler Handler to call
+ * @param handler  Handler to call
  */
 public record HandlerReference(@Nonnull Listener listener, @Nonnull Method handler) {
     /**
      * Gets the priority of this handler reference.
+     *
      * @return Handler priority
      */
     @Nonnull

@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * <h2>SyncScheduler</h2>
  * <p>
- *     A synchronous scheduler.
+ * A synchronous scheduler.
  * </p>
  */
 public final class SyncScheduler implements Scheduler {
@@ -25,16 +25,21 @@ public final class SyncScheduler implements Scheduler {
     @Override
     public void register(@Nonnull Task t) {
         tasks.add(t);
+        times.put(t, System.currentTimeMillis());
     }
 
     @Override
-    public void registerSync(@Nonnull Collection<Task> t) {
-        tasks.addAll(t);
+    public void registerSync(@Nonnull Collection<Task> tasks) {
+        for (final Task t : tasks) {
+            register(t);
+        }
     }
 
     @Override
-    public void registerAsync(@Nonnull Collection<Task> t) {
-        tasks.addAll(t);
+    public void registerAsync(@Nonnull Collection<Task> tasks) {
+        for (final Task t : tasks) {
+            register(t);
+        }
 
         System.out.println("Warning: Scheduler::registerAsync(Collection<Task>) was called to a synchronous scheduler");
         System.out.println("Tasks will be sent to a single thread, as sync schedulers have only one.");

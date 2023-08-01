@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * <h2>AsyncSchedulerCore</h2>
  * <p>
- *     A scheduler core for an asynchronous scheduler.
+ * A scheduler core for an asynchronous scheduler.
  * </p>
  */
 public final class AsyncSchedulerCore {
@@ -45,18 +45,20 @@ public final class AsyncSchedulerCore {
 
     public void register(@Nonnull Task t) {
         tasks.add(t);
+        times.put(t, System.currentTimeMillis());
     }
 
     public void register(@Nonnull Collection<Task> t) {
-        tasks.addAll(t);
+        t.forEach(this::register);
     }
 
     public void unregister(@Nonnull Task t) {
         tasks.remove(t);
+        times.remove(t);
     }
 
     public void unregister(@Nonnull Collection<Task> t) {
-        tasks.removeAll(t);
+        t.forEach(this::unregister);
     }
 
     private final List<Task> tasks = new ArrayList<>();

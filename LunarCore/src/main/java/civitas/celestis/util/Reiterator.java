@@ -9,6 +9,7 @@ package civitas.celestis.util;
 public class Reiterator {
     /**
      * Creates a new reiterator.
+     *
      * @param limit Upper limit of this reiterator
      */
     public Reiterator(int limit) {
@@ -17,8 +18,9 @@ public class Reiterator {
 
     /**
      * Creates a new reiterator.
+     *
      * @param limit Upper limit of this reiterator
-     * @param i Initial counter of this reiterator
+     * @param i     Initial counter of this reiterator
      */
     public Reiterator(int limit, int i) {
         this.limit = limit;
@@ -30,6 +32,7 @@ public class Reiterator {
 
     /**
      * Gets the upper limit of this reiterator.
+     *
      * @return Upper limit
      */
     public int limit() {
@@ -38,6 +41,7 @@ public class Reiterator {
 
     /**
      * Increments this iterator, then returns the incremented value.
+     *
      * @return Incremented iterator
      */
     public int next() {

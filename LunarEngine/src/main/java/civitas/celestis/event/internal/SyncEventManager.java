@@ -11,14 +11,14 @@ import java.util.*;
 /**
  * <h2>SyncEventManager</h2>
  * <p>
- *     A synchronous implementation of {@link EventManager}.
- *     This implementation is recommended for small-sized projects
- *     which do not require asynchronous event processing.
+ * A synchronous implementation of {@link EventManager}.
+ * This implementation is recommended for small-sized projects
+ * which do not require asynchronous event processing.
  * </p>
  * <p>
- *     While there are advantages to use the asynchronous implementation,
- *     the additional overhead may slow down small-sized projects more
- *     than the benefits of additional performance.
+ * While there are advantages to use the asynchronous implementation,
+ * the additional overhead may slow down small-sized projects more
+ * than the benefits of additional performance.
  * </p>
  */
 public final class SyncEventManager implements EventManager {

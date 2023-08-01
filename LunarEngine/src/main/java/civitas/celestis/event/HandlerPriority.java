@@ -3,8 +3,8 @@ package civitas.celestis.event;
 /**
  * <h2>HandlerPriority</h2>
  * <p>
- *     The priority of a handler.
- *     Lower priorities will be called first.
+ * The priority of a handler.
+ * Lower priorities will be called first.
  * </p>
  */
 public enum HandlerPriority {

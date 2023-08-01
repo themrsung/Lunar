@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * <h2>AsyncScheduler</h2>
  * <p>
- *     An asynchronous scheduler.
+ * An asynchronous scheduler.
  * </p>
  */
 public final class AsyncScheduler implements Scheduler {
