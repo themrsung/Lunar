@@ -1,6 +1,6 @@
 package civitas.celestis.util.collection.list;
 
-import civitas.celestis.util.Unique;
+import civitas.celestis.util.object.Unique;
 import jakarta.annotation.Nonnull;
 
 import java.util.UUID;

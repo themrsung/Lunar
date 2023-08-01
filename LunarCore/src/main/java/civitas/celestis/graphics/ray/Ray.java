@@ -1,8 +1,9 @@
 package civitas.celestis.graphics.ray;
 
-import civitas.celestis.graphics.triangle.Triangle;
+import civitas.celestis.graphics.triangle.Vertex;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * <h2>Ray</h2>
@@ -43,6 +44,6 @@ public interface Ray {
      * @param surface Surface this ray has collided with
      * @return Reflection ray
      */
-    @Nonnull
-    Ray reflect(@Nonnull Triangle surface);
+    @Nullable
+    Ray reflect(@Nonnull Vertex surface);
 }
