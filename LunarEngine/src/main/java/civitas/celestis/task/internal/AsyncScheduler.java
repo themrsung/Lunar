@@ -1,7 +1,7 @@
 package civitas.celestis.task.internal;
 
 import civitas.celestis.task.Task;
-import civitas.celestis.util.Reiterator;
+import civitas.celestis.util.counter.Reiterator;
 import jakarta.annotation.Nonnull;
 
 import java.util.Collection;

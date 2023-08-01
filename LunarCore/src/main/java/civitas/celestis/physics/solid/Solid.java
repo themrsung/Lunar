@@ -1,4 +1,4 @@
-package civitas.celestis.geometry.solid;
+package civitas.celestis.physics.solid;
 
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;

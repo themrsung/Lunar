@@ -1,7 +1,8 @@
-package civitas.celestis.util.object;
+package civitas.celestis.object.movable;
 
 import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.object.unique.Unique;
 import jakarta.annotation.Nonnull;
 
 /**

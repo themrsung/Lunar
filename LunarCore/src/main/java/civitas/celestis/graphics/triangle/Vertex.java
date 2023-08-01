@@ -1,6 +1,6 @@
 package civitas.celestis.graphics.triangle;
 
-import civitas.celestis.geometry.solid.Tetrahedron;
+import civitas.celestis.physics.solid.Tetrahedron;
 import civitas.celestis.graphics.ray.Ray;
 import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector2;

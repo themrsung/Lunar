@@ -1,4 +1,4 @@
-package civitas.celestis.util;
+package civitas.celestis.util.counter;
 
 /**
  * <h2>Reiterator</h2>
