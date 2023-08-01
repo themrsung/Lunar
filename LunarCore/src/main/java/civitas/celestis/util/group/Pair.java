@@ -1,4 +1,4 @@
-package civitas.celestis.util.collection;
+package civitas.celestis.util.group;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;

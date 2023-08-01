@@ -11,6 +11,7 @@ import jakarta.annotation.Nonnull;
 public final class LunarObjects {
     /**
      * Checks if two objects overlap.
+     *
      * @param o1 First object
      * @param o2 Second object
      * @return {@code true} if the two objects have at least one point in common

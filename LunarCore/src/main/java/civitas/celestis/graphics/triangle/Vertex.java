@@ -1,10 +1,10 @@
 package civitas.celestis.graphics.triangle;
 
-import civitas.celestis.physics.solid.Tetrahedron;
 import civitas.celestis.graphics.ray.Ray;
 import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector2;
 import civitas.celestis.math.vector.Vector3;
+import civitas.celestis.physics.solid.Tetrahedron;
 import civitas.celestis.ui.element.Polygon2;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;

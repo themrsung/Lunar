@@ -10,13 +10,14 @@ import java.util.List;
 /**
  * <h2>Model</h2>
  * <p>
- *     A three-dimensional model of an object.
+ * A three-dimensional model of an object.
  * </p>
  */
 public interface Model {
     /**
      * Gets the vertices of this model.
-     * @param origin Absolute origin of this model (most likely the location of its parent object)
+     *
+     * @param origin   Absolute origin of this model (most likely the location of its parent object)
      * @param rotation Rotation of this model (most likely the rotation of its parent object)
      * @return List of vertices
      */
