@@ -243,6 +243,16 @@ public final class Vertex implements Iterable<Vector3> {
     }
 
     /**
+     * TEMPORARY METHOD
+     * Brightens this vertex.
+     * @return Brighter vertex
+     */
+    @Nonnull
+    public Vertex brighter() {
+        return new Vertex(a, b, c, color.brighter());
+    }
+
+    /**
      * Assuming this vertex has been translated to a coordinate system relative to the viewer,
      * this method converts the vertex to a renderable polygon.
      * <p>

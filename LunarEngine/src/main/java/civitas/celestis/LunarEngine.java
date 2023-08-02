@@ -5,6 +5,8 @@ import civitas.celestis.event.internal.SyncEventManager;
 import civitas.celestis.listener.object.ObjectPairListener;
 import civitas.celestis.task.internal.AsyncScheduler;
 import civitas.celestis.task.internal.Scheduler;
+import civitas.celestis.world.WorldManager;
+import civitas.celestis.world.internal.SyncWorldManager;
 import jakarta.annotation.Nonnull;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public final class LunarEngine {
     /**
      * Starts the engine.
      */
-    public void start() {
+    public static void start() {
         logger.info("Lunar Engine is starting.");
 
         // Initialize modules
@@ -32,6 +34,7 @@ public final class LunarEngine {
 
         // Start modules
         eventManager.start();
+        worldManager.start();
         scheduler.start();
 
         logger.info("Lunar Engine has started.");
@@ -40,11 +43,12 @@ public final class LunarEngine {
     /**
      * Stops the engine.
      */
-    public void stop() {
+    public static void stop() {
         logger.info("Lunar Engine is stopping.");
 
         // Stop modules
         eventManager.stop();
+        worldManager.stop();
         scheduler.stop();
 
         logger.info("Lunar Engine has stopped.");
@@ -53,7 +57,7 @@ public final class LunarEngine {
     /**
      * Registers first-party event listeners.
      */
-    private void registerEventListeners() {
+    private static void registerEventListeners() {
         eventManager.register(List.of(
                 new ObjectPairListener()
         ));
@@ -83,8 +87,18 @@ public final class LunarEngine {
         return eventManager;
     }
 
+    /**
+     * Gets the world manager instance.
+     * @return {@link WorldManager}
+     */
+    @Nonnull
+    public static WorldManager getWorldManager() {
+        return worldManager;
+    }
+
     private static final Scheduler scheduler = new AsyncScheduler();
     private static final EventManager eventManager = new SyncEventManager();
+    private static final WorldManager worldManager = new SyncWorldManager();
 
     //
     // Logger

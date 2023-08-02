@@ -4,7 +4,7 @@ import civitas.celestis.graphics.model.Model;
 import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.movable.AbstractMovable;
-import civitas.celestis.physics.PhysicsProfile;
+import civitas.celestis.physics.profile.PhysicsProfile;
 import jakarta.annotation.Nonnull;
 
 import java.util.UUID;

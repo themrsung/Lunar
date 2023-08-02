@@ -3,7 +3,7 @@ package civitas.celestis.object.base;
 import civitas.celestis.graphics.model.Model;
 import civitas.celestis.object.Tickable;
 import civitas.celestis.object.movable.Movable;
-import civitas.celestis.physics.PhysicsProfile;
+import civitas.celestis.physics.profile.PhysicsProfile;
 import jakarta.annotation.Nonnull;
 
 /**

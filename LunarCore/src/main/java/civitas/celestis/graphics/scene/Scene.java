@@ -1,5 +1,6 @@
 package civitas.celestis.graphics.scene;
 
+import civitas.celestis.graphics.ray.LightRay;
 import civitas.celestis.graphics.ray.Ray;
 import civitas.celestis.graphics.vertex.Vertex;
 import civitas.celestis.object.RaySource;
@@ -240,6 +241,15 @@ public class Scene {
             }
         }
 
+        // Apply shaders
+        shading.forEach((v, i) -> {
+            // Loop once for now
+            for (int j = 0; j < 1; j++) {
+                vertices.remove(v);
+                vertices.add(v.brighter());
+            }
+        });
+
         // Mark state as idle
         state = State.IDLE;
     }
@@ -265,6 +275,11 @@ public class Scene {
         for (final Vertex v : vertices) {
             final Ray r = ray.reflect(v);
             if (r == null) continue;
+
+            // TEMP
+            if (r instanceof LightRay lr) {
+                shading.put(v, shading.getOrDefault(v, 0d) + lr.intensity());
+            }
 
             // Shoot reflecting ray
             shootRay(r, limit - 1, v);
