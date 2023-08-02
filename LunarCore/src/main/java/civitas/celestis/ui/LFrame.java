@@ -12,6 +12,7 @@ import java.awt.*;
 public class LFrame extends JFrame {
     /**
      * Default constructor.
+     *
      * @throws HeadlessException When the hardware environment does not support the software
      */
     public LFrame() throws HeadlessException {
@@ -19,6 +20,7 @@ public class LFrame extends JFrame {
 
     /**
      * Creates a new frame.
+     *
      * @param gc Graphics configuration object
      */
     public LFrame(@Nonnull GraphicsConfiguration gc) {
@@ -27,6 +29,7 @@ public class LFrame extends JFrame {
 
     /**
      * Creates a new frame.
+     *
      * @param title Title of frame
      * @throws HeadlessException When the hardware environment does not support the software
      */
@@ -36,8 +39,9 @@ public class LFrame extends JFrame {
 
     /**
      * Creates a new frame.
+     *
      * @param title Title of frame
-     * @param gc Graphics configuration object
+     * @param gc    Graphics configuration object
      */
     public LFrame(@Nonnull String title, @Nonnull GraphicsConfiguration gc) {
         super(title, gc);

@@ -245,6 +245,7 @@ public final class Vertex implements Iterable<Vector3> {
     /**
      * TEMPORARY METHOD
      * Brightens this vertex.
+     *
      * @return Brighter vertex
      */
     @Nonnull

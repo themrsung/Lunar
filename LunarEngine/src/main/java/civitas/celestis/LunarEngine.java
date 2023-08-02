@@ -89,6 +89,7 @@ public final class LunarEngine {
 
     /**
      * Gets the world manager instance.
+     *
      * @return {@link WorldManager}
      */
     @Nonnull

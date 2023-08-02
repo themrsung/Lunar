@@ -11,11 +11,12 @@ import jakarta.annotation.Nonnull;
 public final class WavefrontParser {
     /**
      * Converts a Wavefront coordinate into a Lunar coordinate.
+     *
      * @param in Input coordinate
      * @return Converted coordinate
      */
     @Nonnull
     public static Vector3 wavefrontToLunar(@Nonnull FloatTuple in) {
-        return new Vector3(in.getX(), in.getY(), in.getZ());
+        return new Vector3(in.getZ(), in.getY(), in.getX());
     }
 }

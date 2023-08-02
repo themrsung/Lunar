@@ -12,8 +12,6 @@ import civitas.celestis.world.RealisticWorld;
 import de.javagl.obj.Obj;
 import de.javagl.obj.ObjReader;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -46,7 +44,7 @@ public final class LunarTest1 {
         final BaseObject lunarObject = new TestObject(
                 UUID.randomUUID(),
                 Vector3.ZERO,
-                new Rotation(new Vector3(23, 20, 11), Math.toRadians(45)),
+                Rotation.NO_ROTATION,
                 new TestProfile(),
                 new WavefrontModel(obj, 1)
         );
@@ -88,29 +86,17 @@ public final class LunarTest1 {
         // Position object
         lunarObject.setLocation(new Vector3(0, 0, 500));
 
-        // I'll rotate object and camera every input
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    LunarEngine.getLogger().info("Space pressed. Rotating object.");
-
-                    lunarObject.rotate(new Rotation(Vector3.POSITIVE_Y, Math.toRadians(10)));
-
-                    LunarEngine.getLogger().info("Rotation of object: " + lunarObject.getRotation());
-                } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    LunarEngine.getLogger().info("Enter pressed. Rotating camera.");
-
-                    freeCam.setAngle(freeCam.getAngle().rotate(new Rotation(Vector3.POSITIVE_Y, Math.toRadians(45))));
-
-                    LunarEngine.getLogger().info("Rotation of camera: " + freeCam.getAngle());
-                }
-            }
-        });
+        // Add rotation rate to object
+        lunarObject.setRotationRate(new Rotation(new Vector3(10, 20, 30), Math.toRadians(1)));
 
         // Add a random light source
         freeCam.getScene().addRaySource(new RandomRaySource());
 
+        // Position and orient camera
+        freeCam.setOrigin(new Vector3(0, 100, 0));
+        freeCam.setAngle(freeCam.getAngle().rotate(new Rotation(Vector3.POSITIVE_X, Math.toRadians(-15))));
+
         // Alright let's see what happens
+        LunarEngine.getLogger().info("Polygon count: " + lunarObject.getModel().vertices(Vector3.ZERO, Rotation.NO_ROTATION).size());
     }
 }

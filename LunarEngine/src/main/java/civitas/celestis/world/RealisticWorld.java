@@ -165,7 +165,10 @@ public class RealisticWorld extends AbstractWorld {
             // Apply drag force
             o.setAcceleration(o.getAcceleration().multiply(decelerationRatio));
 
-            // Tick objects
+        }
+
+        // Tick objects
+        for (final BaseObject o : objects) {
             o.tick(delta);
         }
     }

@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * <h2>SyncWorldManager</h2>
  * <p>
- *     A synchronous world manager.
+ * A synchronous world manager.
  * </p>
  */
 public final class SyncWorldManager implements WorldManager {

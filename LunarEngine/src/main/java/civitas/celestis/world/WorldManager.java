@@ -9,8 +9,8 @@ import java.util.UUID;
 /**
  * <h2>WorldManager</h2>
  * <p>
- *     A primary module of Lunar Engine.
- *     Handles the lifecycle of worlds.
+ * A primary module of Lunar Engine.
+ * Handles the lifecycle of worlds.
  * </p>
  */
 public interface WorldManager {
@@ -26,6 +26,7 @@ public interface WorldManager {
 
     /**
      * Gets a list of worlds.
+     *
      * @return List of worlds
      */
     @Nonnull
@@ -33,6 +34,7 @@ public interface WorldManager {
 
     /**
      * Gets a world by unique identifier.
+     *
      * @param uniqueId Unique identifier of world
      * @return World of unique identifier
      * @throws NullPointerException When a world of unique identifier cannot be found
@@ -42,12 +44,14 @@ public interface WorldManager {
 
     /**
      * Adds a world to this manager.
+     *
      * @param world World to add
      */
     void addWorld(@Nonnull World world);
 
     /**
      * Removes a world from this manager.
+     *
      * @param world World to remove
      */
     void removeWorld(@Nonnull World world);

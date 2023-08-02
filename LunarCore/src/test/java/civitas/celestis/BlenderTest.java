@@ -2,13 +2,10 @@ package civitas.celestis;
 
 import civitas.celestis.graphics.model.Model;
 import civitas.celestis.graphics.model.wavefront.WavefrontModel;
-import de.javagl.obj.FloatTuple;
 import de.javagl.obj.Obj;
-import de.javagl.obj.ObjFace;
 import de.javagl.obj.ObjReader;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 

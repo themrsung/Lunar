@@ -129,6 +129,7 @@ public class Scene {
      */
     public void clearVertices() {
         vertices.clear();
+        shading.clear();
     }
 
     //

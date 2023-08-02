@@ -19,8 +19,9 @@ import java.util.List;
 public class WavefrontModel implements Model {
     /**
      * Creates a new Wavefront model.
+     *
      * @param object 3D model data
-     * @param scale Scale to apply
+     * @param scale  Scale to apply
      */
     public WavefrontModel(@Nonnull Obj object, double scale) {
         for (int i = 0; i < object.getNumFaces(); i++) {

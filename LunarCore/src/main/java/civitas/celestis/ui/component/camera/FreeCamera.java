@@ -1,8 +1,6 @@
 package civitas.celestis.ui.component.camera;
 
-import civitas.celestis.graphics.model.Model;
 import civitas.celestis.graphics.scene.Scene;
-import civitas.celestis.graphics.vertex.Vertex;
 import civitas.celestis.math.rotation.Rotation;
 import civitas.celestis.math.vector.Vector3;
 import civitas.celestis.object.base.BaseObject;
@@ -101,7 +99,8 @@ public class FreeCamera extends LPanel {
 
     /**
      * Paints the rendered scene on-screen.
-     * @param g  the <code>Graphics</code> context in which to paint
+     *
+     * @param g the <code>Graphics</code> context in which to paint
      */
     @Override
     public void paint(@Nonnull Graphics g) {

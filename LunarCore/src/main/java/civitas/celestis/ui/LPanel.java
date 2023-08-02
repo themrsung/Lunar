@@ -12,7 +12,8 @@ import java.awt.*;
 public class LPanel extends JPanel {
     /**
      * Creates a new panel.
-     * @param layout Layout manager object
+     *
+     * @param layout           Layout manager object
      * @param isDoubleBuffered Whether this panel is double buffered
      */
     public LPanel(@Nonnull LayoutManager layout, boolean isDoubleBuffered) {
@@ -21,6 +22,7 @@ public class LPanel extends JPanel {
 
     /**
      * Creates a new panel.
+     *
      * @param layout Layout manager object
      */
     public LPanel(@Nonnull LayoutManager layout) {
@@ -29,6 +31,7 @@ public class LPanel extends JPanel {
 
     /**
      * Creates a new panel.
+     *
      * @param isDoubleBuffered Whether this panel is double buffered
      */
     public LPanel(boolean isDoubleBuffered) {
