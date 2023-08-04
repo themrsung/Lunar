@@ -12,9 +12,10 @@ import java.awt.*;
 public class LightRay implements Ray {
     /**
      * Creates a new light ray.
-     * @param origin Origin of this ray
+     *
+     * @param origin    Origin of this ray
      * @param direction Direction of this ray
-     * @param color Color of this ray
+     * @param color     Color of this ray
      * @param intensity Intensity of this ray
      */
     public LightRay(@Nonnull Vector3 origin, @Nonnull Vector3 direction, @Nonnull Color color, double intensity) {
@@ -53,6 +54,7 @@ public class LightRay implements Ray {
 
     /**
      * Gets the color of this light ray.
+     *
      * @return Color of ray
      */
     @Nonnull
@@ -62,6 +64,7 @@ public class LightRay implements Ray {
 
     /**
      * Gets the intensity of this light ray.
+     *
      * @return Intensity of ray
      */
     public double intensity() {

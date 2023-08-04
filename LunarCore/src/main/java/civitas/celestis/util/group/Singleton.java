@@ -9,12 +9,12 @@ import java.util.function.UnaryOperator;
 /**
  * <h2>Singleton</h2>
  * <p>
- *     An immutable pointer to one element.
- *     The usefulness of this class is questionable.
+ * An immutable pointer to one element.
+ * The usefulness of this class is questionable.
  * </p>
  * <p>
- *     Have you ever wanted to iterate through one element?
- *     Here you go!
+ * Have you ever wanted to iterate through one element?
+ * Here you go!
  * </p>
  *
  * @param element Element to point to
