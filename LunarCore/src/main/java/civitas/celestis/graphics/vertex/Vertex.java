@@ -1,70 +1,23 @@
 package civitas.celestis.graphics.vertex;
 
-import civitas.celestis.graphics.ray.Ray;
-import civitas.celestis.math.rotation.Rotation;
-import civitas.celestis.math.vector.Vector2;
+import civitas.celestis.math.quaternion.Quaternion;
 import civitas.celestis.math.vector.Vector3;
-import civitas.celestis.physics.solid.Tetrahedron;
-import civitas.celestis.ui.element.Polygon2;
+import civitas.celestis.util.group.Tuple;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
-import java.awt.*;
-import java.util.Iterator;
-import java.util.List;
 import java.util.function.UnaryOperator;
 
 /**
  * <h2>Vertex</h2>
- * <p>A renderable triangle.</p>
+ * <p>
+ * A surface with three corners.
+ * Vertices are used as the base building block for all graphics objects.
+ * </p>
  */
-public final class Vertex implements Iterable<Vector3> {
-    /**
-     * Creates a new vertex.
-     *
-     * @param a     First point of this vertex
-     * @param b     Second point of this vertex
-     * @param c     Third point of this vertex
-     * @param color Base color of this vertex
-     */
-    public Vertex(
-            @Nonnull Vector3 a,
-            @Nonnull Vector3 b,
-            @Nonnull Vector3 c,
-            @Nonnull Color color
-    ) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.color = color;
-    }
-
-    /**
-     * Creates a new vertex.
-     *
-     * @param points A list of points containing exactly 3 points
-     * @param color  Base color of this vertex
-     */
-    public Vertex(
-            @Nonnull List<Vector3> points,
-            @Nonnull Color color
-    ) {
-        if (points.size() != 3) throw new IllegalArgumentException("A vertex must have at least and only 3 points.");
-
-        this.a = points.get(0);
-        this.b = points.get(1);
-        this.c = points.get(2);
-        this.color = color;
-    }
-
-    @Nonnull
-    private final Vector3 a;
-    @Nonnull
-    private final Vector3 b;
-    @Nonnull
-    private final Vector3 c;
-    @Nonnull
-    private final Color color;
+public interface Vertex extends Iterable<Vector3> {
+    //
+    // Geometry
+    //
 
     /**
      * Gets the first point of this vertex.
@@ -72,7 +25,7 @@ public final class Vertex implements Iterable<Vector3> {
      * @return Point A
      */
     @Nonnull
-    public Vector3 a() {return a;}
+    Vector3 a();
 
     /**
      * Gets the second point of this vertex.
@@ -80,7 +33,7 @@ public final class Vertex implements Iterable<Vector3> {
      * @return Point B
      */
     @Nonnull
-    public Vector3 b() {return b;}
+    Vector3 b();
 
     /**
      * Gets the third point of this vertex.
@@ -88,35 +41,7 @@ public final class Vertex implements Iterable<Vector3> {
      * @return Point C
      */
     @Nonnull
-    public Vector3 c() {return c;}
-
-    /**
-     * Gets a list of points in this vertex.
-     *
-     * @return List of points
-     */
-    @Nonnull
-    public List<Vector3> points() {
-        return List.of(a, b, c);
-    }
-
-    /**
-     * Gets the color of this vertex.
-     *
-     * @return Base color
-     */
-    @Nonnull
-    public Color color() {return color;}
-
-    /**
-     * Gets the surface normal of this vertex.
-     *
-     * @return Surface normal
-     */
-    @Nonnull
-    public Vector3 normal() {
-        return b.subtract(a).cross(c.subtract(a));
-    }
+    Vector3 c();
 
     /**
      * Gets the geometric centroid of this vertex.
@@ -124,166 +49,121 @@ public final class Vertex implements Iterable<Vector3> {
      * @return Geometric centroid
      */
     @Nonnull
-    public Vector3 centroid() {
-        return a.add(b).add(c).divide(3);
-    }
+    Vector3 centroid();
 
     /**
-     * Gets the intersection between {@code this} and {@code ray}.
+     * Gets a tuple of the three points of this vertex.
      *
-     * @param ray Ray to check intersection with
-     * @return Intersection point if found, {@code null} if not
-     */
-    @Nullable
-    public Vector3 intersection(@Nonnull Ray ray) {
-        // Initialize variables
-        final Vector3 q1 = ray.origin();
-        final Vector3 q2 = ray.destination(centroid().distance2(ray.origin()));
-
-        final Vector3 p1 = a;
-        final Vector3 p2 = b;
-        final Vector3 p3 = c;
-
-        // Get signed volumes
-
-        // These must have different signs
-        final double sv1 = new Tetrahedron(q1, p1, p2, p3).signedVolume();
-        final double sv2 = new Tetrahedron(q2, p1, p2, p3).signedVolume();
-
-        // These must have the same sign
-        final double sv3 = new Tetrahedron(q1, q2, p1, p2).signedVolume();
-        final double sv4 = new Tetrahedron(q1, q2, p2, p3).signedVolume();
-        final double sv5 = new Tetrahedron(q1, q2, p3, p1).signedVolume();
-
-        // Whether this intersects the ray
-        final boolean intersects = sv1 * sv2 < 0 && sv3 * sv4 * sv5 >= 0;
-
-        if (!intersects) return null;
-
-        final Vector3 n = normal();
-
-        final double denominator = ray.direction().dot(n);
-        if (denominator == 0) return null;
-
-        // Get the point of intersection
-        final double t = centroid().subtract(ray.origin()).dot(n) / denominator;
-        if (t < 0) return null;
-
-        return ray.destination(t);
-    }
-
-    /**
-     * Given a directional vector {@code in}, this returns its reflection vector
-     * if the vector were to collide with this vertex.
-     * <p>
-     * Note that this does not account for whether the two objects intersect,
-     * and cannot be used to check if a vertex and line intersect.
-     * </p>
-     * <p>
-     * To check whether the two objects intersect, check for {@code null}
-     * in the return value of {@link Vertex#intersection(Ray)}.
-     * </p>
-     *
-     * @param in Input vector
-     * @return Reflection vector
+     * @return Tuple of three points
      */
     @Nonnull
-    public Vector3 reflection(@Nonnull Vector3 in) {
-        final Vector3 n = normal();
-        return in.subtract(n.multiply(2 * in.dot(n)));
-    }
+    Tuple<Vector3> points();
 
     /**
-     * Applies a unary operator to all vector components,
-     * then returns the modified instance.
+     * Gets the surface normal of this vertex.
      *
-     * @param action Action to apply
-     * @return Modified instance
+     * @return Surface normal
      */
     @Nonnull
-    public Vertex apply(@Nonnull UnaryOperator<Vector3> action) {
-        final Vector3 x = action.apply(a);
-        final Vector3 y = action.apply(b);
-        final Vector3 z = action.apply(c);
+    Vector3 normal();
 
-        return new Vertex(x, y, z, color);
-    }
+    //
+    // Translucency
+    //
 
     /**
-     * Inflates this vertex by given scale in respect to the relative coordinates of this vertex.
+     * Whether this vertex allows rays to pass through.
      *
-     * @param scale Scale of inflation
+     * @return {@code true} if this vertex is translucent
+     */
+    boolean translucent();
+
+    /**
+     * Gets the alpha of this vertex.
+     * <p>
+     * An alpha of {@code 0} means this vertex is completely transparent,
+     * and rays will not reflect off of this vertex.
+     * </p>
+     * <p>
+     * An alpha of {@code 1} means this vertex is completely opaque,
+     * and rays will not pass through this vertex.
+     * </p>
+     * <p>
+     * Values in between will have both a reflecting ray and a pass-through ray
+     * (if {@link Vertex#translucent()}) is {@code true}),
+     * with varying intensities.
+     * </p>
+     *
+     * @return Alpha of vertex
+     */
+    double alpha();
+
+    //
+    // Methods
+    //
+
+    /**
+     * Applies given action to all points of this vertex, then returns the resulting vertex.
+     *
+     * @param operation Action to apply to each point
+     * @return Resulting vertex
+     */
+    @Nonnull
+    Vertex apply(@Nonnull UnaryOperator<Vector3> operation);
+
+    /**
+     * Inflates this vertex by given scale.
+     *
+     * @param scale Scale to inflate by
      * @return Inflated vertex
      */
     @Nonnull
-    public Vertex inflate(double scale) {
-        return apply(v -> v.multiply(scale));
-    }
+    Vertex inflate(double scale);
 
     /**
-     * Transforms this vertex to a coordinate system of different origin.
+     * Translates this vertex to a relative coordinate system.
      *
-     * @param origin New origin of this vertex (relative to current origin)
-     * @return Transformed vertex
+     * @param origin New origin of this vertex
+     * @return Translated vertex
      */
     @Nonnull
-    public Vertex transform(@Nonnull Vector3 origin) {
-        return apply(v -> v.subtract(origin));
-    }
+    Vertex translate(@Nonnull Vector3 origin);
 
     /**
-     * Rotates this vertex in respect to the relative coordinates of this vertex.
+     * Rotates this vertex by given rotation.
      *
-     * @param rotation Rotation to apply
+     * @param rq Rotation quaternion
      * @return Rotated vertex
      */
     @Nonnull
-    public Vertex rotate(@Nonnull Rotation rotation) {
-        return apply(v -> v.rotate(rotation));
-    }
+    Vertex rotate(@Nonnull Quaternion rq);
 
     /**
-     * TEMPORARY METHOD
-     * Brightens this vertex.
+     * Performs the following operations in sequence, then returns the resulting vertex.
+     * This has performance benefits over calling the component methods in a method chain.
+     * <ol>
+     *     <li>{@link Vertex#translate(Vector3)}</li>
+     *     <li>{@link Vertex#rotate(Quaternion)}</li>
+     *     <li>{@link Vertex#inflate(double)}</li>
+     * </ol>
      *
-     * @return Brighter vertex
+     * @param origin New origin of this vertex
+     * @param rq     Rotation quaternion to apply
+     * @param scale  Scale to inflate by (set to 1 for no inflation)
+     * @return Resulting vertex
      */
     @Nonnull
-    public Vertex brighter() {
-        return new Vertex(a, b, c, color.brighter());
-    }
+    Vertex transform(@Nonnull Vector3 origin, @Nonnull Quaternion rq, double scale);
+
+    //
+    // Cloning
+    //
 
     /**
-     * Assuming this vertex has been translated to a coordinate system relative to the viewer,
-     * this method converts the vertex to a renderable polygon.
-     * <p>
-     * Since {@link Polygon2} extends {@link Polygon}, the return value of this method
-     * can be directly be inputted into a {@code Graphics} object.
-     * </p>
+     * Returns an identical copy of {@code this}.
      *
-     * @param focalLength Focal length of camera at this time
-     * @return Renderable polygon
+     * @return Copy of {@code this}
      */
     @Nonnull
-    public Polygon2 polygon(double focalLength) {
-        final Polygon2 p = new Polygon2();
-
-        for (final Vector3 v : this) {
-            final double z = ((focalLength / (focalLength + v.z())));
-            p.addPoint(new Vector2(z * v.x(), z * -v.y()));
-        }
-
-        return p;
-    }
-
-    /**
-     * Gets an iterator of the component vectors of this vertex.
-     *
-     * @return Iterator of vectors
-     */
-    @Override
-    @Nonnull
-    public Iterator<Vector3> iterator() {
-        return points().iterator();
-    }
+    Vertex copy();
 }

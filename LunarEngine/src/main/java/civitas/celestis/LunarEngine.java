@@ -2,14 +2,10 @@ package civitas.celestis;
 
 import civitas.celestis.event.EventManager;
 import civitas.celestis.event.internal.SyncEventManager;
-import civitas.celestis.listener.object.ObjectPairListener;
 import civitas.celestis.task.internal.AsyncScheduler;
 import civitas.celestis.task.internal.Scheduler;
-import civitas.celestis.world.WorldManager;
-import civitas.celestis.world.internal.SyncWorldManager;
 import jakarta.annotation.Nonnull;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -29,12 +25,8 @@ public final class LunarEngine {
     public static void start() {
         logger.info("Lunar Engine is starting.");
 
-        // Initialize modules
-        registerEventListeners();
-
         // Start modules
         eventManager.start();
-        worldManager.start();
         scheduler.start();
 
         logger.info("Lunar Engine has started.");
@@ -48,19 +40,9 @@ public final class LunarEngine {
 
         // Stop modules
         eventManager.stop();
-        worldManager.stop();
         scheduler.stop();
 
         logger.info("Lunar Engine has stopped.");
-    }
-
-    /**
-     * Registers first-party event listeners.
-     */
-    private static void registerEventListeners() {
-        eventManager.register(List.of(
-                new ObjectPairListener()
-        ));
     }
 
     //
@@ -87,19 +69,8 @@ public final class LunarEngine {
         return eventManager;
     }
 
-    /**
-     * Gets the world manager instance.
-     *
-     * @return {@link WorldManager}
-     */
-    @Nonnull
-    public static WorldManager getWorldManager() {
-        return worldManager;
-    }
-
     private static final Scheduler scheduler = new AsyncScheduler();
     private static final EventManager eventManager = new SyncEventManager();
-    private static final WorldManager worldManager = new SyncWorldManager();
 
     //
     // Logger

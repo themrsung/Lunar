@@ -1,34 +1,23 @@
 package civitas.celestis.graphics.ray;
 
-import civitas.celestis.graphics.vertex.Vertex;
 import civitas.celestis.math.vector.Vector3;
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 
 import java.awt.*;
 
 /**
  * <h2>LightRay</h2>
- * <p>
- * A ray of light.
- * Lunar engine assumes the travel of light is instantaneous.
- * </p>
+ * <p>A ray of light.</p>
  */
-public final class LightRay implements Ray {
+public class LightRay implements Ray {
     /**
      * Creates a new light ray.
-     *
-     * @param origin    Origin of ray
-     * @param direction Direction of ray (automatically normalized)
-     * @param color     Color of ray
-     * @param intensity Intensity of ray
+     * @param origin Origin of this ray
+     * @param direction Direction of this ray
+     * @param color Color of this ray
+     * @param intensity Intensity of this ray
      */
-    public LightRay(
-            @Nonnull Vector3 origin,
-            @Nonnull Vector3 direction,
-            @Nonnull Color color,
-            double intensity
-    ) {
+    public LightRay(@Nonnull Vector3 origin, @Nonnull Vector3 direction, @Nonnull Color color, double intensity) {
         this.origin = origin;
         this.direction = direction.normalize();
         this.color = color;
@@ -43,13 +32,18 @@ public final class LightRay implements Ray {
     private final Color color;
     private final double intensity;
 
-    @Override
-    @Nonnull
-    public Vector3 origin() {return origin;}
 
-    @Override
     @Nonnull
-    public Vector3 direction() {return direction;}
+    @Override
+    public Vector3 origin() {
+        return origin;
+    }
+
+    @Nonnull
+    @Override
+    public Vector3 direction() {
+        return direction;
+    }
 
     @Nonnull
     @Override
@@ -57,28 +51,20 @@ public final class LightRay implements Ray {
         return origin.add(direction.multiply(t));
     }
 
-    @Nullable
-    @Override
-    public LightRay reflect(@Nonnull Vertex surface) {
-        final Vector3 i = surface.intersection(this);
-        if (i == null) return null;
-
-        final Vector3 r = surface.reflection(direction);
-        return new LightRay(i, r, color, intensity); // FIXME add Material and reflectionFactor or something
-    }
-
     /**
-     * Gets the color of this ray.
-     *
+     * Gets the color of this light ray.
      * @return Color of ray
      */
     @Nonnull
-    public Color color() {return color;}
+    public Color color() {
+        return color;
+    }
 
     /**
-     * Gets the intensity of this ray.
-     *
-     * @return Intensity factor
+     * Gets the intensity of this light ray.
+     * @return Intensity of ray
      */
-    public double intensity() {return intensity;}
+    public double intensity() {
+        return intensity;
+    }
 }

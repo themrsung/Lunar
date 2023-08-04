@@ -3,7 +3,10 @@ package civitas.celestis.util.group;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 /**
  * <h2>Pair</h2>
@@ -16,7 +19,7 @@ import java.util.Objects;
  * @param b   Second element of this pair
  * @param <T> Class of elements to hold in this pair
  */
-public record Pair<T>(@Nonnull T a, @Nonnull T b) {
+public record Pair<T>(@Nonnull T a, @Nonnull T b) implements Iterable<T> {
     /**
      * Creates a pair from two objects.
      *
@@ -69,5 +72,31 @@ public record Pair<T>(@Nonnull T a, @Nonnull T b) {
         if (!(o instanceof Pair<?> pair)) return false;
         return (Objects.equals(a, pair.a) && Objects.equals(b, pair.b)) ||
                 (Objects.equals(a, pair.b) && Objects.equals(b, pair.a));
+    }
+
+    /**
+     * Gets an iterator of this pair.
+     *
+     * @return Iterator of pair
+     */
+    @Override
+    @Nonnull
+    public Iterator<T> iterator() {
+        return List.of(a, b).iterator();
+    }
+
+    /**
+     * Performs given operation to both objects of this pair,
+     * then returns the resulting pair.
+     *
+     * @param operation Operation to perform
+     * @return Resulting pair
+     */
+    @Nonnull
+    public Pair<T> apply(@Nonnull UnaryOperator<T> operation) {
+        return new Pair<>(
+                operation.apply(a),
+                operation.apply(b)
+        );
     }
 }

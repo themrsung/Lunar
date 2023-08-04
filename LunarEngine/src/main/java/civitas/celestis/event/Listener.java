@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface Listener {
     /**
-     * Gets a list of event handlers in this listener.
+     * Gets a list of event handler in this listener.
      * <p>
      * <b>Only override this method if you are changing the architecture of the event manager.</b>
      * Any changes here will be reflected in the event manager's code,
